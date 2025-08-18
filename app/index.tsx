@@ -1,18 +1,14 @@
+import CartButton from '@/components/CartButton'
 import { images, offers } from '@/constants'
 import cn from 'clsx'
 import { Fragment } from 'react'
-import { FlatList, Image, Pressable, Text, View } from 'react-native'
+import { FlatList, Image, Pressable, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 export default function App () {
-  
   return (
     <SafeAreaProvider>
-      <SafeAreaView>
-        <View className='flex-between flex-row w-full my-5 px-5'>
-          <View className='flex-start'><Text className='text-sm font-quicksand-bold text-primary'>DELIVER TO</Text><Image source={images.arrowDown} className='size-5' resizeMode='contain' /></View>
-          
-        </View>
+      <SafeAreaView className='flex-1 bg-white'>
         <FlatList
           data={offers}
           keyExtractor={item => item.id.toString()}
@@ -26,7 +22,7 @@ export default function App () {
                     isEven ? 'flex-row-reverse' : 'flex-row'
                   )}
                   style={{ backgroundColor: item.color }}
-                  android_ripple={{ color: "#ffff22" }}
+                  android_ripple={{ color: '#ffff22' }}
                 >
                   {({ pressed }) => (
                     <Fragment>
@@ -37,16 +33,25 @@ export default function App () {
                           resizeMode='contain'
                         />
                       </View>
-                      <View className={cn('flex-1 h-full flex flex-col justify-center items-start gap-4', isEven ? 'pl-5' : 'pr-5')}>
-                        <Text className='text-3xl font-quicksand-bold text-white' leading-tight>{item.title}</Text>
+                      <View
+                        className={cn(
+                          'flex-1 h-full flex flex-col justify-center items-start gap-4',
+                          isEven ? 'pl-5' : 'pr-5'
+                        )}
+                      >
+                        <Text
+                          className='text-3xl font-quicksand-bold text-white'
+                          leading-tight
+                        >
+                          {item.title}
+                        </Text>
                         <Image
-                        source={images.arrowRight}
-                        className='size-10'
-                        resizeMode='contain'
-                        tintColor='#ffffff'
-                      />
+                          source={images.arrowRight}
+                          className='size-10'
+                          resizeMode='contain'
+                          tintColor='#ffffff'
+                        />
                       </View>
-                      
                     </Fragment>
                   )}
                 </Pressable>
@@ -54,6 +59,24 @@ export default function App () {
             )
           }}
           contentContainerClassName='px-5 pb-20'
+          ListHeaderComponent={() => (
+            <View className='justify-between items-center flex-row w-full my-5'>
+          <View>
+            <Text className='text-sm font-quicksand-bold text-primary'>
+              DELIVER TO
+            </Text>
+            <TouchableOpacity className='flex-row gap-x-1 mt-0.5 items-center'>
+              <Text className='text-base font-quicksand-bold text-black-100'>New Zealand</Text>
+              <Image
+              source={images.arrowDown}
+              className='size-2'
+              resizeMode='contain'
+            />
+            </TouchableOpacity>            
+          </View>
+          <CartButton />
+        </View>
+          )}
         />
       </SafeAreaView>
     </SafeAreaProvider>
