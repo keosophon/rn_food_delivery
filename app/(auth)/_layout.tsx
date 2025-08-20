@@ -1,5 +1,6 @@
 
-import { Slot } from 'expo-router'
+import CustomButton from '@/components/CustomButton'
+import CustomInput from '@/components/CustomInput'
 import React from 'react'
 import { Dimensions, Image, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -14,8 +15,10 @@ const _layout = () => {
             <ImageBackground source={images.loginGraphic} className="w-full h-full rounded-b-lg" resizeMode="stretch" />
             <Image source={images.logo} className="absolute size-48 self-center -bottom-10  z-10" />
           </View>
-          <Slot />
+       
         </ScrollView>
+        <CustomInput />
+        <CustomButton />
         
       </KeyboardAvoidingView>      
     </SafeAreaView>
