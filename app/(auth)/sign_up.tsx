@@ -11,16 +11,21 @@ const SignUp = () => {
 
   const [isSubmitting, setIsSubmitting]= useState(false);
   const [form, setForm] = useState({name: '', email:'', password: ''});
+  
 
   const submit = async ()=> {
-    const {name, email, password} = form;
+    const name = form.name.trim();
+    const email = form.email.trim();
+    const password = form.password.trim();
+    
+
     if (!name|| !email || !password) {
       return Alert.alert('Error', 'Please fill in all fields');
     }
     setIsSubmitting(true);
 
     try {
-      Alert.alert('sign up', email);
+      
       //Call appwrite sign up function
       await CreateUser({name, email, password});
       router.replace('/');

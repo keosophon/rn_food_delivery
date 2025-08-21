@@ -24,7 +24,7 @@ export const CreateUser = async ({name, email, password}: CreateUserParams) => {
     
     
     try {
-        const appWriteAuthUser = await account.create(ID.unique(), name, email, password);
+        const appWriteAuthUser = await account.create(ID.unique(), email, password,name);
 
         if (!appWriteAuthUser) {
             throw new Error('User not created');
