@@ -77,6 +77,7 @@ export default function App () {
           <CartButton />
         </View>
           )}
+          
         />
       </SafeAreaView>
     </SafeAreaProvider>

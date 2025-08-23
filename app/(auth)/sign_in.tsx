@@ -5,6 +5,7 @@ import { Alert, Text, View } from 'react-native'
 import CustomButton from '@/components/CustomButton'
 import CustomInput from '@/components/CustomInput'
 
+
 const SignIn = () => {
   const router = useRouter();
 
@@ -28,6 +29,7 @@ const SignIn = () => {
       router.replace('/');
     } catch(error:any) {
       Alert.alert('Error', error.message);
+      Sentry.captureEvent(error)
     } finally {
       setIsSubmitting(false);
     } 
@@ -59,6 +61,7 @@ const SignIn = () => {
           Sign Up
         </Link>
       </View>
+      
     </View>
   )
 }
