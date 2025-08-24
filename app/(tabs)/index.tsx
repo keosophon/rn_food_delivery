@@ -4,8 +4,13 @@ import cn from 'clsx'
 import { Fragment } from 'react'
 import { FlatList, Image, Pressable, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import useAuthStore from '../../store/auth.store'
 
 export default function App () {
+  const {user, isAuthenticated} = useAuthStore();
+  if (isAuthenticated) {
+    console.log(user);
+  }
   return (
     <SafeAreaProvider>
       <SafeAreaView className='flex-1 bg-white'>
