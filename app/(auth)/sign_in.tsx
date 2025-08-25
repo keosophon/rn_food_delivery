@@ -4,7 +4,7 @@ import { Alert, Text, View } from 'react-native'
 
 import CustomButton from '@/components/CustomButton'
 import CustomInput from '@/components/CustomInput'
-
+import * as Sentry from '@sentry/react-native'
 
 const SignIn = () => {
   const router = useRouter();
