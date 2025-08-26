@@ -1,4 +1,4 @@
-import { CreateUserParams, SignInParams } from './../type.d';
+import { CreateUserParams, GetMenuParams, SignInParams } from './../type.d';
 
 
 import { Account, Avatars, Client, Databases, ID, Query, Storage } from "react-native-appwrite";
@@ -84,6 +84,42 @@ export const getCurrentUser = async()=> {
         }
 
         return currentUser.documents[0];
+    } catch (error) {
+        throw new Error(error as string);
+    }
+}
+
+export const getMenu = async({category, query}: GetMenuParams) => {
+    try {
+        const queries: string[] = [];
+        
+        if (category) {
+            queries.push(Query.equal('category', category));
+        }
+        if (query) {
+            queries.push(Query.search('name', query));
+        }
+        const menus = await database.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.menuCollectionId,
+            queries
+        );
+        console.log(menus);
+      
+
+        return menus.documents;
+    } catch (error) {
+        throw new Error(error as string);
+    }
+}
+
+export const getCategories = async() => {
+    try {
+        const categories = await database.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.categoryCollectionId,
+        );
+        return categories.documents;
     } catch (error) {
         throw new Error(error as string);
     }
