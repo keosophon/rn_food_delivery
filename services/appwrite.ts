@@ -104,9 +104,7 @@ export const getMenu = async({category, query}: GetMenuParams) => {
             appwriteConfig.menuCollectionId,
             queries
         );
-        console.log(menus);
-      
-
+        
         return menus.documents;
     } catch (error) {
         throw new Error(error as string);
