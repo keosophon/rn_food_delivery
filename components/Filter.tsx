@@ -1,11 +1,54 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import { Category } from '@/type'
+import cn from 'clsx'
+import { useLocalSearchParams } from 'expo-router'
+import React, { useState } from 'react'
+import { FlatList, Platform, Text, TouchableOpacity } from 'react-native'
 
-const Filter = () => {
+const Filter = ({ categories }: { categories: Category[] }) => {
+  const searchParams = useLocalSearchParams()
+  //console.log(searchParams.category)
+  const [active, setActive] = useState(searchParams.category || '')
+
+  const handlePress = (id: string) => {
+    setActive(id)
+  }
+
+  const filterData: (Category | { name: string; $id: string })[] = categories
+    ? [{ name: 'All', $id: '' }, ...categories]
+    : [{ name: 'All', $id: '' }]
+
   return (
-    <View>
-      <Text>Filter</Text>
-    </View>
+    <FlatList
+      data={filterData}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerClassName='gap-x-2 pb-3'
+      keyExtractor={item => item.$id}
+      renderItem={({ item }) => (
+        <TouchableOpacity
+          onPress={() => handlePress(item.$id)}
+          key={item.$id}
+          className={cn(
+            'px-6 py-3 rounded-full mr-2 shadow-sm shadow-black/10',
+            active === item.$id ? 'bg-primary' : 'bg-white'
+          )}
+          style={
+            Platform.OS === 'android'
+              ? { elevation: 5, shadowColor: '##878787' }
+              : {}
+          }
+        >
+          <Text
+            className={cn(
+              'text-lg font-quicksand-medium',
+              active === item.$id ? 'text-white' : 'text-gray-600'
+            )}
+          >
+            {item.name}
+          </Text>
+        </TouchableOpacity>
+      )}
+    />
   )
 }
 

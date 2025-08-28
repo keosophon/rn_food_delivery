@@ -12,6 +12,8 @@ import { FlatList, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Search = () => {
+ 
+
   const { category, query } = useLocalSearchParams<{
     category: string
     query: string
@@ -26,10 +28,12 @@ const Search = () => {
   })
 
   const { data: categories } = useAppwrite({ fn: getCategories })
- 
+  
   useEffect(() => {
     refetch({ category, query, limit: 6 })
   }, [category, query])
+
+
 
   return (
     <SafeAreaView className='bg-white h-full'>
@@ -65,7 +69,8 @@ const Search = () => {
               </View>
             </View>
             <SearchBar />
-            <Filter />
+            
+            <Filter categories={categories!}/>
           </View>
         )}
         ListEmptyComponent={() =>

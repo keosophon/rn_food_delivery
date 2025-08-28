@@ -1,16 +1,25 @@
-import { MenuItem } from '@/type';
-import React from 'react';
-import { Image, Platform, Text, TouchableOpacity } from 'react-native';
-
+import { MenuItem } from '@/type'
+import React from 'react'
+import { Image, Platform, Text, TouchableOpacity } from 'react-native'
 
 const MenuCard = ({ item: { image_url, name, price } }: { item: MenuItem }) => {
- console.log(image_url);
   return (
-    <TouchableOpacity className='relative py-9 px-3.5 pt-24 flex items-center justify-end bg-white shadow-md shadow-black/10 rounded-3xl' style={Platform.OS === 'ios' ? { } : { elevation:10, shadowColor: '##878787' }}    >
+    <TouchableOpacity
+      className='relative py-9 px-3.5 pt-24 flex items-center justify-end bg-white shadow-md shadow-black/10 rounded-3xl'
+      style={
+        Platform.OS === 'ios' ? {} : { elevation: 10, shadowColor: '##878787' }
+      }
+    >
       <Image
         source={{ uri: image_url }}
-        className='size-32 absolute -top-10'
+        style={{
+          width: 128,
+          height: 128,
+          position: 'absolute',
+          top: -35,
+        }}
         resizeMode='contain'
+        onError={(e) => console.log('Image failed to load', e.nativeEvent)}
       />
       <Text
         className='text-center text-lg font-quicksand-bold !important text-dark-100 mb-2'
