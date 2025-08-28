@@ -1,11 +1,16 @@
 import CartButton from '@/components/CartButton'
+import Filter from '@/components/Filter'
+import MenuCard from '@/components/MenuCard'
+import SearchBar from '@/components/SearchBar'
 import { getCategories, getMenu } from '@/services/appwrite'
 import useAppwrite from '@/services/useAppWrite'
+import { MenuItem } from '@/type'
 import cn from 'clsx'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect } from 'react'
 import { FlatList, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+
 const Search = () => {
   const { category, query } = useLocalSearchParams<{
     category: string
@@ -34,14 +39,14 @@ const Search = () => {
           const isFirstInRow = index % 2 === 0;
           return (
           <View className={cn('flex-1 max-w-[48%]', isFirstInRow ? 'mt-0' : 'mt-10')}>
-            <Text>{item.name}</Text>
+            <MenuCard item={item as unknown as MenuItem} />
           </View>
         )}}
         
         keyExtractor={item => item.$id}
         numColumns={2}
-        columnWrapperClassName={'gap-7'}
-        contentContainerClassName={'gap-7 px-5 pb-32'}
+        columnWrapperClassName={'gap-6'}
+        contentContainerClassName={'gap-6 px-5 pb-32'}
         ListHeaderComponent={() => (
           <View className='my-5 gap-5'>
             <View className='flex-row justify-between w-full'>
@@ -59,8 +64,8 @@ const Search = () => {
                 <CartButton />
               </View>
             </View>
-            <Text>Search Input</Text>
-            <Text>Filter</Text>
+            <SearchBar />
+            <Filter />
           </View>
         )}
         ListEmptyComponent={() =>
