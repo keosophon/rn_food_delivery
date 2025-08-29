@@ -12,12 +12,11 @@ import { FlatList, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Search = () => {
- 
-
   const { category, query } = useLocalSearchParams<{
     category: string
     query: string
   }>()
+
   const { data, loading, refetch } = useAppwrite({
     fn: getMenu,
     params: {
@@ -27,7 +26,7 @@ const Search = () => {
     }
   })
 
-  const { data: categories } = useAppwrite({ fn: getCategories })
+  const { data:categories } = useAppwrite({ fn: getCategories })
   
   useEffect(() => {
     refetch({ category, query, limit: 6 })

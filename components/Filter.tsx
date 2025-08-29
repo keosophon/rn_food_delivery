@@ -1,21 +1,26 @@
 import { Category } from '@/type'
 import cn from 'clsx'
-import { useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams, useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import { FlatList, Platform, Text, TouchableOpacity } from 'react-native'
 
+
 const Filter = ({ categories }: { categories: Category[] }) => {
+  const router = useRouter()
   const searchParams = useLocalSearchParams()
   //console.log(searchParams.category)
   const [active, setActive] = useState(searchParams.category || '')
 
   const handlePress = (id: string) => {
     setActive(id)
+
+    if (id==='all') router.setParams({category: undefined})
+    else router.setParams({ category: id })
   }
 
   const filterData: (Category | { name: string; $id: string })[] = categories
-    ? [{ name: 'All', $id: '' }, ...categories]
-    : [{ name: 'All', $id: '' }]
+    ? [{ name: 'All', $id: 'all' }, ...categories]
+    : [{ name: 'All', $id: 'all' }]
 
   return (
     <FlatList
