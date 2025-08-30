@@ -57,11 +57,7 @@ const Search = () => {
                 <Text className='small-bold uppercase text-primary'>
                   search
                 </Text>
-                <View className='flex-row items-start justify-center gap-x-1 mt-0.5'>
-                  <Text className='paragraph-semibold text-dark-100'>
-                    Find your favorite food
-                  </Text>
-                </View>
+                
               </View>
               <View className='self-end'>
                 <CartButton />

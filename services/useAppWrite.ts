@@ -15,7 +15,6 @@ interface UseAppwriteReturn<T, P> {
 }
 
 
-
 const useAppwrite = <T, P extends Record<string, string | number>>({
                                                                        fn,
                                                                        params = {} as P,
